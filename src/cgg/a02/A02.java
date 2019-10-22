@@ -12,7 +12,7 @@ public class A02 {
 	public static void main(String[] args) {
 		final int width = 800;
 		final int height = 450;
-		final String filename = "doc/a02-disc.png";
+		final String filename = "doc/a02-discs.png";
 		final String filename1 = "doc/a02-supersampling.png";
 
 		Image image = new Image(width, height);
