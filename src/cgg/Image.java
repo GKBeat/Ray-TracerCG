@@ -1,6 +1,7 @@
 package cgg;
 
-import cgtools.*;
+import cgtools.Color;
+import cgtools.ImageWriter;
 
 public class Image {
 	
@@ -19,9 +20,9 @@ public class Image {
     	
         int index = 3*((y * width) + x);
         
-        pixels[index+0] = color.r;
-        pixels[index+1] = color.g;
-        pixels[index+2] = color.b;
+        pixels[index+0] = Math.pow(color.r, 1/2.2);
+        pixels[index+1] = Math.pow(color.g, 1/2.2);
+        pixels[index+2] = Math.pow(color.b, 1/2.2);
         
     }
 
