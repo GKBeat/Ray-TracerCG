@@ -59,18 +59,18 @@ public class A02 {
     public static Color stratifiedSampling(int x, int y, int samplesPerPixel, ColorChecker cc) {
     	double r = 0;
     	double g = 0;
-    	double b = 0; 
+    	double b = 0;
     	
-    	int samplesPer_Row_Column = (int) Math.sqrt(samplesPerPixel);
+    	int samplesPerRowColumn = (int) Math.sqrt(samplesPerPixel);
     	
-    	for(int xPixel = 0; xPixel < samplesPer_Row_Column; xPixel++) {
-    		for(int yPixel = 0; yPixel < samplesPer_Row_Column; yPixel++) {
-    			
+    	for(int xPixel = 0; xPixel < samplesPerRowColumn; xPixel++) {
+    		for(int yPixel = 0; yPixel < samplesPerRowColumn; yPixel++) {
+    		
     			double randomX = Random.random();
     			double randomY = Random.random();
     			
-    			double xSample = x + (xPixel + randomX)/samplesPer_Row_Column;
-    			double ySample = y + (yPixel + randomY)/samplesPer_Row_Column;
+    			double xSample = x + (xPixel + randomX)/samplesPerRowColumn;
+    			double ySample = y + (yPixel + randomY)/samplesPerRowColumn;
     			
     			Color color = cc.pixelColor(xSample, ySample);
     			
