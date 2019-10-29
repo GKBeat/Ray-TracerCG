@@ -16,7 +16,7 @@ public class A03 {
 		
 		Image image = new Image(width, height);
 		LochKamera cam = new LochKamera(width, height, Math.PI/2);
-		KugelSurface kugel = new KugelSurface(Point.point(0, 0, -3), 1, new Color(1, 0., 0.3));
+		KugelSurface kugel = new KugelSurface(Point.point(0, 0, -3), 1, new Color(0.1, 1, 0.3));
 		
 		for (int x = 0; x != width; x++) {
 			for (int y = 0; y != height; y++) {
@@ -49,7 +49,7 @@ public class A03 {
 				Hit hit = kugel.intersect(ray);
 				
 				if (hit == null) {
-					color = Color.black;
+					color = new Color(0.5, 0.25, 0);
 				}else {
 					color = Util.shade(hit.n, hit.c);
 				}
