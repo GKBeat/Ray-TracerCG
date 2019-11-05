@@ -1,13 +1,13 @@
-package cgg.a03;
+package cgg.scene.rays;
 
 import cgtools.Direction;
 import cgtools.Point;
 
 public class Ray {
-	protected Point x0;
-	protected Direction d;
-	protected double tMin;
-	protected double tMax;
+	public final Point x0;
+	public final Direction d;
+	public final double tMin;
+	public final double tMax;
 	
 	
 	public Ray(Point x0, Direction d, double tMin, double tMax) {

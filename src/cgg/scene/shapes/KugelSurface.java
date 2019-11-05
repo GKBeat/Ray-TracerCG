@@ -1,11 +1,13 @@
-package cgg.a03;
+package cgg.scene.shapes;
 
+import cgg.scene.rays.Hit;
+import cgg.scene.rays.Ray;
 import cgtools.Color;
 import cgtools.Direction;
 import cgtools.Point;
 import cgtools.Vector;
 
-public class KugelSurface {
+public class KugelSurface implements Shape{
 	protected Point c;
 	protected double radius;
 	protected Color color;
@@ -35,7 +37,7 @@ public class KugelSurface {
 			t = (-b) / (2 * a);
 
 			p = r.pointAt(t);
-			return new Hit(t, p, Point.subtract(p, this.c), color);
+			return new Hit(t, p, Vector.normalize(Point.subtract(p, this.c)), color);
 		} else { // 2 schnittpunkte
 
 			t1 = (-b + Math.sqrt(d)) / (2 * a);
@@ -43,11 +45,11 @@ public class KugelSurface {
 
 			if ((t2 < 0 || t1 < t2) && t1 >= r.tMin && t1 <= r.tMax) { //
 				p = r.pointAt(t1);
-				return new Hit(t1, p, Point.subtract(p, this.c), color);
+				return new Hit(t1, p, Vector.normalize(Point.subtract(p, this.c)), color);
 
 			} else if ((t1 < 0 || t2 < t1) && t2 >= r.tMin && t2 <= r.tMax) {
 				p = r.pointAt(t2);
-				return new Hit(t2, p, Point.subtract(p, this.c), color);
+				return new Hit(t2, p, Vector.normalize(Point.subtract(p, this.c)), color);
 			}
 		}
 		return null;

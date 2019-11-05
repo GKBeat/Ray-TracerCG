@@ -1,4 +1,4 @@
-package cgg.a03;
+package cgg.scene.rays;
 
 import cgtools.Color;
 import cgtools.Direction;
@@ -6,10 +6,10 @@ import cgtools.Point;
 
 public class Hit {
 	
-	protected double t;
-	protected Point x; //position des treffers
-	protected Direction n;
-	protected Color c;
+	public final double t;
+	public final Point x; //position des treffers
+	public final Direction n;
+	public final Color c;
 	
 	public Hit(double t, Point x, Direction n, Color c) {
 		this.t = t;

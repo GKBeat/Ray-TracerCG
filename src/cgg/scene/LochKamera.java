@@ -1,4 +1,4 @@
-package cgg.a03;
+package cgg.scene;
 
 import cgtools.Direction;
 import cgtools.Point;

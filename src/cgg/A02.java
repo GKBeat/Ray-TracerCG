@@ -1,9 +1,11 @@
-package cgg.a02;
+package cgg;
 
 import java.util.Collections;
 import java.util.LinkedList;
 
-import cgg.Image;
+import cgg.another.Circle;
+import cgg.another.ColorChecker;
+import cgg.another.RadCompare;
 import cgtools.Color;
 import cgtools.Random;
 

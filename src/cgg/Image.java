@@ -2,6 +2,7 @@ package cgg;
 
 import cgtools.Color;
 import cgtools.ImageWriter;
+import cgtools.Sampler;
 
 public class Image {
 	
@@ -23,7 +24,14 @@ public class Image {
         pixels[index+0] = Math.pow(color.r, 1/2.2);
         pixels[index+1] = Math.pow(color.g, 1/2.2);
         pixels[index+2] = Math.pow(color.b, 1/2.2);
-        
+    }
+    
+    public void sample(Sampler sampler) {
+        for (int x = 0; x != width; x++) {
+            for (int y = 0; y != height; y++) {
+                setPixel(x, y, sampler.getColor(x, y));
+            }
+        }
     }
 
     public void write(String filename) {

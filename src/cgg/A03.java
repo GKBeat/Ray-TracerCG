@@ -1,6 +1,9 @@
-package cgg.a03;
+package cgg;
 
-import cgg.Image;
+import cgg.scene.LochKamera;
+import cgg.scene.rays.Hit;
+import cgg.scene.rays.Ray;
+import cgg.scene.shapes.KugelSurface;
 import cgtools.Color;
 import cgtools.Direction;
 import cgtools.Point;
@@ -45,7 +48,7 @@ public class A03 {
     			double ySample = y + (yPixel + randomY)/samplesPerRowColumn;
     			
 				Direction d = cam.getDirectionThroughPoint(xSample, ySample);
-				Ray ray = new Ray(Point.point(0, 0, 0), d, 0, Double.MAX_VALUE);
+				Ray ray = new Ray(Point.point(0, 0, 0), d, 0, Double.POSITIVE_INFINITY);
 				Hit hit = kugel.intersect(ray);
 				
 				if (hit == null) {

@@ -1,5 +1,9 @@
-package cgg.a03;
+package cgg.another;
 
+import cgg.scene.LochKamera;
+import cgg.scene.rays.Hit;
+import cgg.scene.rays.Ray;
+import cgg.scene.shapes.KugelSurface;
 import cgtools.Color;
 import cgtools.Direction;
 import cgtools.Point;

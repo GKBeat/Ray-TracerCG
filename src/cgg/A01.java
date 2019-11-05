@@ -1,9 +1,7 @@
-package cgg.a01;
+package cgg;
 
 import cgtools.*;
 import static cgtools.Color.*;
-
-import cgg.Image;
 
 public class A01 {
 

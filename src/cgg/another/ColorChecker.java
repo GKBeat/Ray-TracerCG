@@ -1,4 +1,4 @@
-package cgg.a02;
+package cgg.another;
 
 import java.util.List;
 
