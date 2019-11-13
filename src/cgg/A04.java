@@ -1,5 +1,7 @@
 package cgg;
 
+import cgg.material.BackgroundMaterial;
+import cgg.material.PerfectDiffuseMaterial;
 import cgg.sampler.Raytracer;
 import cgg.sampler.StratifiedSampler;
 import cgg.scene.LochKamera;
@@ -21,37 +23,37 @@ public class A04 {
 		final String filename1 = "doc/a04-scene.png";
 		
 		Image image = new Image(width, height);
-		LochKamera camera = new LochKamera(width, height, Math.PI / 3);
+		LochKamera camera = new LochKamera(width, height, Math.PI / 3, Point.zero, 0, Double.POSITIVE_INFINITY);
 		
 //--------------------------------------------------------------------------------------------------------------------------
-		Shape ground = new Plane(5, Point.point(0.0, -0.5, 0.0), Direction.direction(0, 1, 0), Color.gray);
-		Shape globe1 = new KugelSurface(Point.point(-1.0, -0.25, -2.5), 0.7, new Color(1, 0.1, 0.1));
-		Shape globe2 = new KugelSurface(Point.point(0.0, -0.25, -2.5), 0.5, new Color(0, 1, 0.4));
-		Shape globe3 = new KugelSurface(Point.point(1.0, -0.25, -2.5), 0.7, new Color(0, 0.5, 1));
-		Background bg = new Background(Color.black);
+		Shape ground = new Plane(5, Point.point(0.0, -0.5, 0.0), Direction.direction(0, 1, 0), new PerfectDiffuseMaterial(Color.gray));
+		Shape globe1 = new KugelSurface(Point.point(-1.0, -0.25, -2.5), 0.7, new PerfectDiffuseMaterial(new Color(1, 0.1, 0.1)));
+		Shape globe2 = new KugelSurface(Point.point(0.0, -0.25, -2.5), 0.5, new PerfectDiffuseMaterial(new Color(0, 1, 0.4)));
+		Shape globe3 = new KugelSurface(Point.point(1.0, -0.25, -2.5), 0.7, new PerfectDiffuseMaterial(new Color(0, 0.5, 1)));
+		Background bg = new Background(new BackgroundMaterial(Color.black));
 		
 		Group gr = new Group(new Shape[] {ground, globe1, globe2, globe3, bg});
-		Raytracer raytracer = new Raytracer(camera, gr);
+		Raytracer raytracer = new Raytracer(camera, gr, 5);
 		
 		image.sample(new StratifiedSampler(raytracer, 100));
 		
 		image.write(filename);
 		System.out.println("Wrote image: " + filename);
 //--------------------------------------------------------------------------------------------------------------------------	
-		Shape groundND = new Plane(4, Point.point(0.0, -0.5, -2.5), Direction.direction(0, 1, 0), Color.white);
-		Shape legs = new KugelSurface(Point.point(0.0, -0.5, -2.5), 0.4, Color.white);
-		Shape body = new KugelSurface(Point.point(0.0, 0, -2.5), 0.25, Color.white);
-		Shape head = new KugelSurface(Point.point(0.0, 0.4, -2.5), 0.2, Color.white);
-		Shape leftEye = new KugelSurface(Point.point(-0.04, 0.175, -1), 0.01, Color.black);
-		Shape rightEye = new KugelSurface(Point.point(0.04, 0.175, -1), 0.01, Color.black);
-		Shape nose = new KugelSurface(Point.point(0.0, 0.15, -1), 0.01, Color.red);
-		Background bg1 = new Background(new Color(0, 0, 0.2));
+		Shape groundND = new Plane(4, Point.point(0.0, -0.5, -2.5), Direction.direction(0, 1, 0), new PerfectDiffuseMaterial(Color.white));
+		Shape legs = new KugelSurface(Point.point(0.0, -0.5, -2.5), 0.4, new PerfectDiffuseMaterial(Color.white));
+		Shape body = new KugelSurface(Point.point(0.0, 0, -2.5), 0.25, new PerfectDiffuseMaterial(Color.white));
+		Shape head = new KugelSurface(Point.point(0.0, 0.4, -2.5), 0.2, new PerfectDiffuseMaterial(Color.white));
+		Shape leftEye = new KugelSurface(Point.point(-0.04, 0.175, -1), 0.01, new PerfectDiffuseMaterial(Color.black));
+		Shape rightEye = new KugelSurface(Point.point(0.04, 0.175, -1), 0.01, new PerfectDiffuseMaterial(Color.black));
+		Shape nose = new KugelSurface(Point.point(0.0, 0.15, -1), 0.01, new PerfectDiffuseMaterial(Color.red));
+		Background bg1 = new Background(new BackgroundMaterial(new Color(0, 0, 0.2)));
 		
 		Group snowMan = new Group(new Shape[] {legs, body, head, nose, leftEye, rightEye});
 		Group snowflakes = new Group(createSnowflakes(125));
 		Group gr1 = new Group(new Shape[] {groundND, bg1, snowMan, snowflakes});
 				
-		Raytracer raytracerND = new Raytracer(camera, gr1);
+		Raytracer raytracerND = new Raytracer(camera, gr1, 5);
 		
 		image.sample(new StratifiedSampler(raytracerND, 100));
 		
@@ -80,7 +82,7 @@ public class A04 {
 			
 			y = Random.random()-0.5;
 			
-			tmp[i] = new KugelSurface(Point.point(x, y, z), 0.01, Color.white);
+			tmp[i] = new KugelSurface(Point.point(x, y, z), 0.01, new PerfectDiffuseMaterial(Color.white));
 		}
 		
 		return tmp;

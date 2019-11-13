@@ -1,8 +1,8 @@
 package cgg.scene.shapes;
 
+import cgg.material.Material;
 import cgg.scene.rays.Hit;
 import cgg.scene.rays.Ray;
-import cgtools.Color;
 import cgtools.Direction;
 import cgtools.Point;
 import cgtools.Vector;
@@ -11,13 +11,13 @@ public class Plane implements Shape {
 	protected double d; // alles größer als das ist kein hit für die plane
 	protected Point p; // ankerpunkt
 	protected Direction n;
-	protected Color color;
+	protected Material material;
 
-	public Plane(double d, Point p, Direction n, Color color) {
+	public Plane(double d, Point p, Direction n, Material material) {
 		this.d = d;
 		this.p = p;
-		this.n = n;
-		this.color = color;
+		this.n = Direction.normalize(n);
+		this.material = material;
 	}
 
 	@Override
@@ -34,10 +34,10 @@ public class Plane implements Shape {
 
 			if (t > r.tMin && t < r.tMax) {
 				Point hit = r.pointAt(t);
-				if(Point.length(hit) > d) {
+				if (Point.length(hit) > d) {
 					return null;
 				}
-				return new Hit(t, hit, Vector.normalize(Direction.subtract(hit, p)), color);
+				return new Hit(t, hit, n, material);
 			} else {
 				return null;
 			}

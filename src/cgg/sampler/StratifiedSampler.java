@@ -18,7 +18,6 @@ public class StratifiedSampler implements Sampler{
 	@Override
 	public Color getColor(double x, double y) {
 		Color color = new Color(0, 0, 0);
-    	int samplesPerPixel = 100;
     	int samplesPerRowColumn = (int) Math.sqrt(samplesPerPixel);
     	
     	for(int xPixel = 0; xPixel < samplesPerRowColumn; xPixel++) {

@@ -2,7 +2,6 @@ package cgg.scene.shapes;
 
 import cgg.scene.rays.Hit;
 import cgg.scene.rays.Ray;
-import cgtools.Color;
 import cgtools.Direction;
 import cgtools.Point;
 
@@ -19,13 +18,13 @@ public class Group implements Shape{
 		Point x = Point.point(Double.POSITIVE_INFINITY, Double.POSITIVE_INFINITY, Double.POSITIVE_INFINITY);
 		Direction n =  Direction.direction(Double.POSITIVE_INFINITY, Double.POSITIVE_INFINITY, Double.POSITIVE_INFINITY);
 		
-		Hit shortestHit = new Hit(t, x, n, Color.blue);
+		Hit shortestHit = new Hit(t, x, n, null);
 		for(Shape s : shapes) {
 			Hit tmp = s.intersect(r);
 			if(tmp == null) {
 				continue;
 			}
-			if(tmp.t < shortestHit.t) {
+			if(tmp.t <= shortestHit.t) {
 				shortestHit = tmp;
 			}
 		}

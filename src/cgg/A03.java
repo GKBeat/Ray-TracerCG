@@ -1,14 +1,12 @@
 package cgg;
 
+import cgg.material.PerfectDiffuseMaterial;
+import cgg.sampler.Raytracer;
+import cgg.sampler.StratifiedSampler;
 import cgg.scene.LochKamera;
-import cgg.scene.rays.Hit;
-import cgg.scene.rays.Ray;
 import cgg.scene.shapes.KugelSurface;
 import cgtools.Color;
-import cgtools.Direction;
 import cgtools.Point;
-import cgtools.Random;
-import cgtools.Util;
 
 public class A03 {
 
@@ -18,51 +16,13 @@ public class A03 {
 		final String filename = "doc/a03-one-sphere.png";
 		
 		Image image = new Image(width, height);
-		LochKamera cam = new LochKamera(width, height, Math.PI/2);
-		KugelSurface kugel = new KugelSurface(Point.point(0, 0, -3), 1, new Color(0.1, 1, 0.3));
+		LochKamera cam = new LochKamera(width, height, Math.PI/2, Point.zero, 0, Double.POSITIVE_INFINITY);
+		KugelSurface kugel = new KugelSurface(Point.point(0, 0, -3), 1, new PerfectDiffuseMaterial(new Color(0.1, 1, 0.3)));
 		
-		for (int x = 0; x != width; x++) {
-			for (int y = 0; y != height; y++) {
-				image.setPixel(x, y, stratifiedSampling(x, y, 100, cam, kugel));
-			}
-		}
+		image.sample(new StratifiedSampler(new Raytracer(cam, kugel, 5), 100));
 
 		image.write(filename);
 		System.out.println("Wrote image: " + filename);
 	}
-
-	public static Color stratifiedSampling(int x, int y, int samplesPerPixel, LochKamera cam, KugelSurface kugel) {
-    	double r = 0;
-    	double g = 0;
-    	double b = 0;
-    	Color color;
-    	int samplesPerRowColumn = (int) Math.sqrt(samplesPerPixel);
-    	
-    	for(int xPixel = 0; xPixel < samplesPerRowColumn; xPixel++) {
-    		for(int yPixel = 0; yPixel < samplesPerRowColumn; yPixel++) {
-    		
-    			double randomX = Random.random();
-    			double randomY = Random.random();
-    			
-    			double xSample = x + (xPixel + randomX)/samplesPerRowColumn;
-    			double ySample = y + (yPixel + randomY)/samplesPerRowColumn;
-    			
-				Direction d = cam.getDirectionThroughPoint(xSample, ySample);
-				Ray ray = new Ray(Point.point(0, 0, 0), d, 0, Double.POSITIVE_INFINITY);
-				Hit hit = kugel.intersect(ray);
-				
-				if (hit == null) {
-					color = new Color(0.5, 0.25, 0);
-				}else {
-					color = Util.shade(hit.n, hit.c);
-				}
-	    		
-	    		r = r + color.r;
-	    		g = g + color.g;
-	    		b = b + color.b;	
-    		}
-    	}	
-    	return new Color(r/samplesPerPixel, g/samplesPerPixel, b/samplesPerPixel);
-    }
 
 }

@@ -1,6 +1,6 @@
 package cgg.scene.rays;
 
-import cgtools.Color;
+import cgg.material.Material;
 import cgtools.Direction;
 import cgtools.Point;
 
@@ -9,13 +9,14 @@ public class Hit {
 	public final double t;
 	public final Point x; //position des treffers
 	public final Direction n;
-	public final Color c;
+	public final Material material;
 	
-	public Hit(double t, Point x, Direction n, Color c) {
+	
+	public Hit(double t, Point x, Direction n, Material material) {
 		this.t = t;
 		this.x = x;
 		this.n = n;
-		this.c = c;
+		this.material = material;
 	}
 	
 	@Override
