@@ -12,6 +12,8 @@ public interface Material {
 	
 	public abstract boolean isScattered();
 	
+	public abstract boolean isRefracted(); 
+	
 	public abstract Color getAlbedo();
 	
 	public abstract Color getEmission();

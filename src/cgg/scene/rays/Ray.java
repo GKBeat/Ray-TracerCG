@@ -25,5 +25,4 @@ public class Ray {
 		
 		return x;
 	}
-
 }

@@ -45,6 +45,11 @@ public class PerfectDiffuseMaterial implements Material{
 	}
 
 	@Override
+	public boolean isRefracted() {
+		return false;
+	}
+
+	@Override
 	public Color getAlbedo() {
 		return albedo;
 	}
@@ -53,5 +58,7 @@ public class PerfectDiffuseMaterial implements Material{
 	public Color getEmission() {
 		return emission;
 	}
+
+
 
 }

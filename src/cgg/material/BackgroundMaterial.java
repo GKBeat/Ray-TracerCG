@@ -4,16 +4,16 @@ import cgg.scene.rays.Hit;
 import cgg.scene.rays.Ray;
 import cgtools.Color;
 
-public class BackgroundMaterial implements Material{
-	
+public class BackgroundMaterial implements Material {
+
 	protected Color albedo;
 	protected Color emission;
-	
+
 	public BackgroundMaterial(Color emission) {
 		albedo = Color.black;
 		this.emission = emission;
-		
 	}
+
 	@Override
 	public Ray calculateNewRay(Hit hit, Ray ray) {
 		return null;
@@ -26,6 +26,12 @@ public class BackgroundMaterial implements Material{
 
 	@Override
 	public boolean isScattered() {
+		return false;
+	}
+
+	@Override
+	public boolean isRefracted() {
+		// TODO Auto-generated method stub
 		return false;
 	}
 
