@@ -7,7 +7,7 @@ import cgg.sampler.StratifiedSampler;
 import cgg.scene.LochKamera;
 import cgg.scene.shapes.Background;
 import cgg.scene.shapes.Group;
-import cgg.scene.shapes.KugelSurface;
+import cgg.scene.shapes.Kugel;
 import cgg.scene.shapes.Plane;
 import cgg.scene.shapes.Shape;
 import cgtools.Color;
@@ -27,9 +27,9 @@ public class A04 {
 		
 //--------------------------------------------------------------------------------------------------------------------------
 		Shape ground = new Plane(5, Point.point(0.0, -0.5, 0.0), Direction.direction(0, 1, 0), new PerfectDiffuseMaterial(Color.gray));
-		Shape globe1 = new KugelSurface(Point.point(-1.0, -0.25, -2.5), 0.7, new PerfectDiffuseMaterial(new Color(1, 0.1, 0.1)));
-		Shape globe2 = new KugelSurface(Point.point(0.0, -0.25, -2.5), 0.5, new PerfectDiffuseMaterial(new Color(0, 1, 0.4)));
-		Shape globe3 = new KugelSurface(Point.point(1.0, -0.25, -2.5), 0.7, new PerfectDiffuseMaterial(new Color(0, 0.5, 1)));
+		Shape globe1 = new Kugel(Point.point(-1.0, -0.25, -2.5), 0.7, new PerfectDiffuseMaterial(new Color(1, 0.1, 0.1)));
+		Shape globe2 = new Kugel(Point.point(0.0, -0.25, -2.5), 0.5, new PerfectDiffuseMaterial(new Color(0, 1, 0.4)));
+		Shape globe3 = new Kugel(Point.point(1.0, -0.25, -2.5), 0.7, new PerfectDiffuseMaterial(new Color(0, 0.5, 1)));
 		Background bg = new Background(new BackgroundMaterial(Color.black));
 		
 		Group gr = new Group(new Shape[] {ground, globe1, globe2, globe3, bg});
@@ -41,12 +41,12 @@ public class A04 {
 		System.out.println("Wrote image: " + filename);
 //--------------------------------------------------------------------------------------------------------------------------	
 		Shape groundND = new Plane(4, Point.point(0.0, -0.5, -2.5), Direction.direction(0, 1, 0), new PerfectDiffuseMaterial(Color.white));
-		Shape legs = new KugelSurface(Point.point(0.0, -0.5, -2.5), 0.4, new PerfectDiffuseMaterial(Color.white));
-		Shape body = new KugelSurface(Point.point(0.0, 0, -2.5), 0.25, new PerfectDiffuseMaterial(Color.white));
-		Shape head = new KugelSurface(Point.point(0.0, 0.4, -2.5), 0.2, new PerfectDiffuseMaterial(Color.white));
-		Shape leftEye = new KugelSurface(Point.point(-0.04, 0.175, -1), 0.01, new PerfectDiffuseMaterial(Color.black));
-		Shape rightEye = new KugelSurface(Point.point(0.04, 0.175, -1), 0.01, new PerfectDiffuseMaterial(Color.black));
-		Shape nose = new KugelSurface(Point.point(0.0, 0.15, -1), 0.01, new PerfectDiffuseMaterial(Color.red));
+		Shape legs = new Kugel(Point.point(0.0, -0.5, -2.5), 0.4, new PerfectDiffuseMaterial(Color.white));
+		Shape body = new Kugel(Point.point(0.0, 0, -2.5), 0.25, new PerfectDiffuseMaterial(Color.white));
+		Shape head = new Kugel(Point.point(0.0, 0.4, -2.5), 0.2, new PerfectDiffuseMaterial(Color.white));
+		Shape leftEye = new Kugel(Point.point(-0.04, 0.175, -1), 0.01, new PerfectDiffuseMaterial(Color.black));
+		Shape rightEye = new Kugel(Point.point(0.04, 0.175, -1), 0.01, new PerfectDiffuseMaterial(Color.black));
+		Shape nose = new Kugel(Point.point(0.0, 0.15, -1), 0.01, new PerfectDiffuseMaterial(Color.red));
 		Background bg1 = new Background(new BackgroundMaterial(new Color(0, 0, 0.2)));
 		
 		Group snowMan = new Group(new Shape[] {legs, body, head, nose, leftEye, rightEye});
@@ -82,7 +82,7 @@ public class A04 {
 			
 			y = Random.random()-0.5;
 			
-			tmp[i] = new KugelSurface(Point.point(x, y, z), 0.01, new PerfectDiffuseMaterial(Color.white));
+			tmp[i] = new Kugel(Point.point(x, y, z), 0.01, new PerfectDiffuseMaterial(Color.white));
 		}
 		
 		return tmp;

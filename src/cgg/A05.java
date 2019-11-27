@@ -7,7 +7,7 @@ import cgg.sampler.StratifiedSampler;
 import cgg.scene.LochKamera;
 import cgg.scene.shapes.Background;
 import cgg.scene.shapes.Group;
-import cgg.scene.shapes.KugelSurface;
+import cgg.scene.shapes.Kugel;
 import cgg.scene.shapes.Plane;
 import cgg.scene.shapes.Shape;
 import cgtools.Color;
@@ -25,13 +25,13 @@ public class A05 {
 		
 		Shape ground = new Plane(7, Point.point(0.0, -0.5, 0.0), Direction.direction(0, 1, 0), new PerfectDiffuseMaterial(new Color(0.1, 0.8, 0.2)));
 		
-		Shape globe1 = new KugelSurface(Point.point(-1.25, -0.2, -1.75), 0.3, new PerfectDiffuseMaterial(new Color(0.3, 0.8, 1)));
-		Shape globe2 = new KugelSurface(Point.point(-1, 0, -2.5), 0.5, new PerfectDiffuseMaterial(new Color(0.3, 0.4, 1)));
+		Shape globe1 = new Kugel(Point.point(-1.25, -0.2, -1.75), 0.3, new PerfectDiffuseMaterial(new Color(0.3, 0.8, 1)));
+		Shape globe2 = new Kugel(Point.point(-1, 0, -2.5), 0.5, new PerfectDiffuseMaterial(new Color(0.3, 0.4, 1)));
 		
-		Shape globe5 = new KugelSurface(Point.point(0, 1.5, -5), 2, new PerfectDiffuseMaterial(new Color(0.3, 0.2, 1)));
+		Shape globe5 = new Kugel(Point.point(0, 1.5, -5), 2, new PerfectDiffuseMaterial(new Color(0.3, 0.2, 1)));
 		
-		Shape globe3 = new KugelSurface(Point.point(1.0, 0, -2.5), 0.5, new PerfectDiffuseMaterial(new Color(0.4, 0.2, 1)));
-		Shape globe4 = new KugelSurface(Point.point(1.25, -0.2, -1.75), 0.3, new PerfectDiffuseMaterial(new Color(0.8, 0.2, 1)));
+		Shape globe3 = new Kugel(Point.point(1.0, 0, -2.5), 0.5, new PerfectDiffuseMaterial(new Color(0.4, 0.2, 1)));
+		Shape globe4 = new Kugel(Point.point(1.25, -0.2, -1.75), 0.3, new PerfectDiffuseMaterial(new Color(0.8, 0.2, 1)));
 		
 		Background bg = new Background(new BackgroundMaterial(new Color(0.6, 0.9, 1)));
 		

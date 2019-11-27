@@ -33,9 +33,10 @@ public class Raytracer implements Sampler{
 		Hit hit = shape.intersect(ray);
 		
 		Material m = hit.material;
+		Ray r = m.calculateNewRay(hit, ray);
 		
-		if(m.isScattered()) {
-			Color c = Color.multiply(m.getAlbedo(), calculateRadiance(m.calculateNewRay(hit, ray), depth-1));
+		if(r != null) {
+			Color c = Color.multiply(m.getAlbedo(), calculateRadiance(r, depth-1));
 			return Color.add(m.getEmission(), c);
 		}else {
 			return m.getEmission();

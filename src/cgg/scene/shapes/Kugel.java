@@ -7,12 +7,12 @@ import cgtools.Direction;
 import cgtools.Point;
 import cgtools.Vector;
 
-public class KugelSurface implements Shape {
+public class Kugel implements Shape {
 	protected Point c;
 	protected double radius;
 	protected Material material;
 
-	public KugelSurface(Point c, double radius, Material material) {
+	public Kugel(Point c, double radius, Material material) {
 		this.c = c;
 		this.radius = radius;
 		this.material = material;
