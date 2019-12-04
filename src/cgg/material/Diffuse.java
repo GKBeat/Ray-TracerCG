@@ -7,12 +7,12 @@ import cgtools.Direction;
 import cgtools.Random;
 import cgtools.Util;
 
-public class PerfectDiffuseMaterial implements Material{
+public class Diffuse implements Material{
 	
 	protected Color albedo;
 	protected Color emission;
 	
-	public PerfectDiffuseMaterial(Color albedo) {
+	public Diffuse(Color albedo) {
 		this.albedo = albedo;
 		emission = new Color(0, 0, 0);
 	}

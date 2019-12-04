@@ -1,7 +1,7 @@
 package cgg;
 
 import cgg.material.BackgroundMaterial;
-import cgg.material.PerfectDiffuseMaterial;
+import cgg.material.Diffuse;
 import cgg.sampler.Raytracer;
 import cgg.sampler.StratifiedSampler;
 import cgg.scene.LochKamera;
@@ -12,6 +12,7 @@ import cgg.scene.shapes.Plane;
 import cgg.scene.shapes.Shape;
 import cgtools.Color;
 import cgtools.Direction;
+import cgtools.Matrix;
 import cgtools.Point;
 import cgtools.Random;
 
@@ -23,13 +24,13 @@ public class A04 {
 		final String filename1 = "doc/a04-scene.png";
 		
 		Image image = new Image(width, height);
-		LochKamera camera = new LochKamera(width, height, Math.PI / 3, Point.zero, 0, Double.POSITIVE_INFINITY);
+		LochKamera camera = new LochKamera(width, height, Math.PI / 3, Matrix.identity, 0, Double.POSITIVE_INFINITY);
 		
 //--------------------------------------------------------------------------------------------------------------------------
-		Shape ground = new Plane(5, Point.point(0.0, -0.5, 0.0), Direction.direction(0, 1, 0), new PerfectDiffuseMaterial(Color.gray));
-		Shape globe1 = new Kugel(Point.point(-1.0, -0.25, -2.5), 0.7, new PerfectDiffuseMaterial(new Color(1, 0.1, 0.1)));
-		Shape globe2 = new Kugel(Point.point(0.0, -0.25, -2.5), 0.5, new PerfectDiffuseMaterial(new Color(0, 1, 0.4)));
-		Shape globe3 = new Kugel(Point.point(1.0, -0.25, -2.5), 0.7, new PerfectDiffuseMaterial(new Color(0, 0.5, 1)));
+		Shape ground = new Plane(5, Point.point(0.0, -0.5, 0.0), Direction.direction(0, 1, 0), new Diffuse(Color.gray));
+		Shape globe1 = new Kugel(Point.point(-1.0, -0.25, -2.5), 0.7, new Diffuse(new Color(1, 0.1, 0.1)));
+		Shape globe2 = new Kugel(Point.point(0.0, -0.25, -2.5), 0.5, new Diffuse(new Color(0, 1, 0.4)));
+		Shape globe3 = new Kugel(Point.point(1.0, -0.25, -2.5), 0.7, new Diffuse(new Color(0, 0.5, 1)));
 		Background bg = new Background(new BackgroundMaterial(Color.black));
 		
 		Group gr = new Group(new Shape[] {ground, globe1, globe2, globe3, bg});
@@ -40,13 +41,13 @@ public class A04 {
 		image.write(filename);
 		System.out.println("Wrote image: " + filename);
 //--------------------------------------------------------------------------------------------------------------------------	
-		Shape groundND = new Plane(4, Point.point(0.0, -0.5, -2.5), Direction.direction(0, 1, 0), new PerfectDiffuseMaterial(Color.white));
-		Shape legs = new Kugel(Point.point(0.0, -0.5, -2.5), 0.4, new PerfectDiffuseMaterial(Color.white));
-		Shape body = new Kugel(Point.point(0.0, 0, -2.5), 0.25, new PerfectDiffuseMaterial(Color.white));
-		Shape head = new Kugel(Point.point(0.0, 0.4, -2.5), 0.2, new PerfectDiffuseMaterial(Color.white));
-		Shape leftEye = new Kugel(Point.point(-0.04, 0.175, -1), 0.01, new PerfectDiffuseMaterial(Color.black));
-		Shape rightEye = new Kugel(Point.point(0.04, 0.175, -1), 0.01, new PerfectDiffuseMaterial(Color.black));
-		Shape nose = new Kugel(Point.point(0.0, 0.15, -1), 0.01, new PerfectDiffuseMaterial(Color.red));
+		Shape groundND = new Plane(4, Point.point(0.0, -0.5, -2.5), Direction.direction(0, 1, 0), new Diffuse(Color.white));
+		Shape legs = new Kugel(Point.point(0.0, -0.5, -2.5), 0.4, new Diffuse(Color.white));
+		Shape body = new Kugel(Point.point(0.0, 0, -2.5), 0.25, new Diffuse(Color.white));
+		Shape head = new Kugel(Point.point(0.0, 0.4, -2.5), 0.2, new Diffuse(Color.white));
+		Shape leftEye = new Kugel(Point.point(-0.04, 0.175, -1), 0.01, new Diffuse(Color.black));
+		Shape rightEye = new Kugel(Point.point(0.04, 0.175, -1), 0.01, new Diffuse(Color.black));
+		Shape nose = new Kugel(Point.point(0.0, 0.15, -1), 0.01, new Diffuse(Color.red));
 		Background bg1 = new Background(new BackgroundMaterial(new Color(0, 0, 0.2)));
 		
 		Group snowMan = new Group(new Shape[] {legs, body, head, nose, leftEye, rightEye});
@@ -67,6 +68,7 @@ public class A04 {
 		double x = 0;
 		double y = 0;
 		double z = 0;
+		
 		for(int i = 0; i < numSnowflakes; i++) {
 			
 			if(i%2 == 0) {
@@ -82,7 +84,7 @@ public class A04 {
 			
 			y = Random.random()-0.5;
 			
-			tmp[i] = new Kugel(Point.point(x, y, z), 0.01, new PerfectDiffuseMaterial(Color.white));
+			tmp[i] = new Kugel(Point.point(x, y, z), 0.01, new Diffuse(Color.white));
 		}
 		
 		return tmp;

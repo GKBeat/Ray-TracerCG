@@ -38,6 +38,7 @@ public class Raytracer implements Sampler{
 		if(r != null) {
 			Color c = Color.multiply(m.getAlbedo(), calculateRadiance(r, depth-1));
 			return Color.add(m.getEmission(), c);
+//			return Vector.asColor(hit.n);
 		}else {
 			return m.getEmission();
 		}

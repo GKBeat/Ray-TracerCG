@@ -8,8 +8,9 @@ import cgtools.Point;
 import cgtools.Vector;
 
 public class Plane implements Shape {
+	
 	protected double d; // alles größer als das ist kein hit für die plane
-	protected Point p; // ankerpunkt
+	public final Point p; // ankerpunkt
 	protected Direction n;
 	protected Material material;
 
@@ -34,7 +35,9 @@ public class Plane implements Shape {
 
 			if (t > r.tMin && t < r.tMax) {
 				Point hit = r.pointAt(t);
-				if (Point.length(hit) > d) {
+				Direction HitToCenter = Direction.subtract(hit, p);
+				double distanzeLenght = Direction.length(HitToCenter);
+				if (d <= distanzeLenght) {
 					return null;
 				}
 				return new Hit(t, hit, n, material);
@@ -43,5 +46,4 @@ public class Plane implements Shape {
 			}
 		}
 	}
-
 }

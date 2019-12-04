@@ -6,7 +6,7 @@ import cgtools.Direction;
 import cgtools.Point;
 
 public class Group implements Shape{
-	protected Shape[] shapes;
+	public final Shape[] shapes;
 	
 	public Group(Shape[] shapes){
 		this.shapes = shapes;

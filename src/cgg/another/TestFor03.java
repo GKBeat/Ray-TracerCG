@@ -1,12 +1,12 @@
 package cgg.another;
 
 import cgg.scene.LochKamera;
-import cgtools.Point;
+import cgtools.Matrix;
 
 public class TestFor03 {
 	
 	public static void two() {
-		LochKamera cam = new LochKamera(10, 10, Math.PI/2, Point.zero, 0, Double.POSITIVE_INFINITY);
+		LochKamera cam = new LochKamera(10, 10, Math.PI/2, Matrix.identity, 0, Double.POSITIVE_INFINITY);
 		
 		
 		//Test for 3.2

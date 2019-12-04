@@ -4,7 +4,6 @@ import cgg.scene.rays.Hit;
 import cgg.scene.rays.Ray;
 import cgtools.Color;
 import cgtools.Direction;
-import cgtools.Point;
 import cgtools.Random;
 import cgtools.Util;
 
