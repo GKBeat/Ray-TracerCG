@@ -59,15 +59,15 @@ public class A07 {
 		
 		Group logLineL = makeLogWall(-2.5, -0.75);
 		Group logLineR = makeLogWall(0.5, -0.75);
-		Group logLineO = makeLogTop(-3, 1.25, 6);
+		Group logLineO = makeLogTop(-3, 1.25, -4, 6);
 		Group logDoor = makeDoor(-0.39, -1);
 		
 		Group kerze = makeKerzenStand(-0.75);
 		Group kerze1 = makeKerzenStand(0.75);
 		
-		Group walkWay = makeWalkWay(snow);
-		Group bushL = makeBushes(-0.75, -3);
-		Group bushR = makeBushes(0.75, -3);
+		Group walkWay = makeWalkWay(snow, 15);
+		Group bushL = makeBushes(-0.75, -3, 15);
+		Group bushR = makeBushes(0.75, -3, 15);
 		
 		
 		Group gr1 = new Group(new Shape[] { snow, bg, logLineL, logLineR, pfeilerR, pfeilerL, logLineO, logDoor,
@@ -90,7 +90,7 @@ public class A07 {
 	}
 	
 	public static Group makeLogWall(double x, double y) {
-		Group tmp = new Group(new Shape[4]);
+		Group tmp = new Group(new Shape[6]);
 		
 		for(int i = 0; i < tmp.shapes.length; i++) {
 			tmp.shapes[i] = new ZylinderX(Point.point(x, y, -4), 0.25, 2, new Diffuse(br));
@@ -99,16 +99,31 @@ public class A07 {
 		return tmp;
 	}
 	
-	public static Group makeLogTop(double x, double y, double height) {
+	public static Group makeLogTop(double x, double y, double z, double height) {
 		Group tmp = new Group(new Shape[6]);
 		for(int i = 0; i < tmp.shapes.length; i++) {
-			tmp.shapes[i] = new ZylinderX(Point.point(x, y, -4), 0.25, height, new Diffuse(br));
+			tmp.shapes[i] = new ZylinderX(Point.point(x, y, z), 0.3, height, new Diffuse(br));
 			height--;
 			if(height==0) {
 				height = 1;
 			}
-			y += 0.5;
+			y += 0.25;
 			x += 0.5;
+			z -= 0.5;
+		}
+		return tmp;
+	}
+	public static Group makeLogTop1(double x, double y, double z, double height) {
+		Group tmp = new Group(new Shape[6]);
+		for(int i = 0; i < tmp.shapes.length; i++) {
+			tmp.shapes[i] = new ZylinderX(Point.point(x, y, z), 0.3, height, new Diffuse(br));
+			height--;
+			if(height==0) {
+				height = 1;
+			}
+			y += 0.25;
+			x += 0.5;
+			z += 0.5;
 		}
 		return tmp;
 	}
@@ -117,7 +132,7 @@ public class A07 {
 		Group tmp = new Group(new Shape[5]);
 		
 		for(int i = 0; i < tmp.shapes.length; i++) {
-			tmp.shapes[i] = new ZylinderY(Point.point(x, y, -3.95), 0.1, 2, new Diffuse(br));
+			tmp.shapes[i] = new ZylinderY(Point.point(x, y, -3.95), 0.1, 3, new Diffuse(br));
 			x += 0.2;
 		}
 		return tmp;
@@ -142,15 +157,15 @@ public class A07 {
 	public static Group makeKerzenStand(double x) {
 		Group tmp = new Group(new Shape[3]);
 		
-		tmp.shapes[0] = new Plane(0.2, Point.point(x, -0.50, -3), Direction.direction(0, 1, 0), new Diffuse(ag));
-		tmp.shapes[1] = new ZylinderY(Point.point(x, -0.5, -3), 0.05, 0.25, new Diffuse(Color.white));
-		tmp.shapes[2] = new Kugel(Point.point(x, -0.20, -3), 0.05, new BackgroundMaterial(Color.red));
+		tmp.shapes[0] = new Plane(0.2, Point.point(x, -0.50, -3.5), Direction.direction(0, 1, 0), new Diffuse(ag));
+		tmp.shapes[1] = new ZylinderY(Point.point(x, -0.5, -3.5), 0.05, 0.25, new Diffuse(Color.white));
+		tmp.shapes[2] = new Kugel(Point.point(x, -0.20, -3.5), 0.05, new BackgroundMaterial(Color.red));
 		
 		return tmp;
 	}
 	
-	public static Group makeWalkWay(Plane plane) {
-		Group tmp = new Group(new Shape[15]);
+	public static Group makeWalkWay(Plane plane, int index) {
+		Group tmp = new Group(new Shape[index]);
 		double z = plane.p.z;
 		for(int i = 0; i < tmp.shapes.length; i++) {
 			
@@ -160,8 +175,8 @@ public class A07 {
 		return tmp;
 	}
 	
-	public static Group makeBushes(double x, double z) {
-		Group tmp = new Group(new Shape[15]);
+	public static Group makeBushes(double x, double z, int index) {
+		Group tmp = new Group(new Shape[index]);
 		for(int i = 0; i < tmp.shapes.length; i++) {
 			if(i%2 == 0) {
 				tmp.shapes[i] = new Kugel(Point.point(x, -0.75, z), 0.25, new Diffuse(new Color(0.1, 0.4, 0.2)));
