@@ -1,5 +1,12 @@
 package cgg;
 
+import java.util.ArrayList;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
+
+import cgg.sampler.MThreading;
 import cgtools.Color;
 import cgtools.ImageWriter;
 import cgtools.Sampler;
@@ -27,11 +34,31 @@ public class Image {
     }
     
     public void sample(Sampler sampler) {
-        for (int x = 0; x != width; x++) {
-            for (int y = 0; y != height; y++) {
-                setPixel(x, y, sampler.getColor(x, y));
+    	long startTime = System.currentTimeMillis();
+    	ExecutorService pool = Executors.newFixedThreadPool(2);
+    	ArrayList<Future<Color>> pixels = new ArrayList<Future<Color>>(width*height);
+    	
+        for (int x = 0; x < width; x++) {
+            for (int y = 0; y < height; y++) {
+            	pixels.add(pool.submit(new MThreading(x, y, sampler)));
             }
         }
+        
+        int index = 0;
+        for(int x = 0; x < width; x++) {
+        	for(int y = 0; y < height; y++) {
+        		try {
+					setPixel(x, y, pixels.get(index).get());
+				} catch (InterruptedException | ExecutionException e) {
+					System.err.println("tbh idk");
+					e.printStackTrace();
+				}
+        		index++;
+        	}
+        }
+        pool.shutdown();
+        long endTime = System.currentTimeMillis();
+        System.out.println("Took " + (endTime - startTime)/ 1_000 + " s");
     }
 
     public void write(String filename) {

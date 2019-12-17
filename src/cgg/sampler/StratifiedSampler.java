@@ -11,7 +11,7 @@ public class StratifiedSampler implements Sampler{
 	
 	public StratifiedSampler(Sampler sampler, int samplesPerPixel) {
 		this.sampler = sampler;
-		this.samplesPerPixel = samplesPerPixel;
+		this.samplesPerPixel = samplesPerPixel;		
 	}
 	
 
