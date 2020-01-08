@@ -57,25 +57,6 @@ public class ImageTexture implements Sampler {
         return divide(color, componentScale);
     }
     
-//    public Color getColor(double u, double v) {
-//        int x = (int) ((u - Math.floor(u)) * width);
-//        int y = (int) ((v - Math.floor(v)) * height);
-//        double[] pixelBuffer = new double[components];
-//        image.getRaster().getPixel(x, y, pixelBuffer);
-//        Color color = red;
-//        switch (components) {
-//        case 1:
-//            color = color(pixelBuffer[0], 0, 0);
-//        case 2:
-//            color = color(pixelBuffer[0], pixelBuffer[1], 0);
-//        case 3:
-//            color = color(pixelBuffer[0], pixelBuffer[1], pixelBuffer[2]);
-//        case 4:
-//            color = color(pixelBuffer[0], pixelBuffer[1], pixelBuffer[2]);
-//        }
-//        return divide(color, componentScale);
-//    }
-    
     private double gamma (double value) {
     	return Math.pow((value/componentScale), 2.2)*componentScale;
     }
