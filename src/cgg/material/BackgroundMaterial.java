@@ -3,15 +3,16 @@ package cgg.material;
 import cgg.scene.rays.Hit;
 import cgg.scene.rays.Ray;
 import cgtools.Color;
+import cgtools.Sampler;
 
 public class BackgroundMaterial implements Material {
 
 	protected Color albedo;
-	protected Color emission;
+	protected Sampler emission;
 
-	public BackgroundMaterial(Color emission) {
-		albedo = Color.black;
-		this.emission = emission;
+	public BackgroundMaterial(Sampler sampler) {
+		this.albedo = Color.black;
+		emission = sampler;
 	}
 
 	@Override
@@ -31,18 +32,17 @@ public class BackgroundMaterial implements Material {
 
 	@Override
 	public boolean isRefracted() {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
-	public Color getAlbedo() {
+	public Color getAlbedo(double x, double y) {
 		return albedo;
 	}
 
 	@Override
-	public Color getEmission() {
-		return emission;
+	public Color getEmission(double x, double y) {
+		return emission.getColor(x, y);
 	}
 
 }

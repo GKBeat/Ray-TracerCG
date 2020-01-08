@@ -29,7 +29,7 @@ public class Group implements Shape{
 		
 		r = transform.transformRayFromWorld(r);
 		
-		Hit shortestHit = new Hit(t, x, n, null);
+		Hit shortestHit = new Hit(t, x, n, null ,null);
 		for(Shape s : shapes) {
 			Hit tmp = s.intersect(r);
 			if(tmp == null) {

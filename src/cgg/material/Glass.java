@@ -5,21 +5,23 @@ import cgg.scene.rays.Ray;
 import cgtools.Color;
 import cgtools.Direction;
 import cgtools.Random;
+import cgtools.Sampler;
 import cgtools.Util;
 
 public class Glass implements Material {
 
 	private double n1Init;
 	private double n2Init;
-	protected Color albedo;
+	protected Sampler albedo;
 	protected Color emission;
-
-	public Glass(Color albedo) {
+	
+	public Glass(Sampler albedo) {
 		n1Init = 1.0;
 		n2Init = 1.5;
 		this.albedo = albedo;
 		emission = new Color(0, 0, 0);
 	}
+	
 
 	@Override
 	public Ray calculateNewRay(Hit hit, Ray ray) {
@@ -34,7 +36,7 @@ public class Glass implements Material {
 			n2 = n1Init;
 		}
 		
-		Hit reflectedHit = new Hit(hit.t, hit.x, n, hit.material);
+		Hit reflectedHit = new Hit(hit.t, hit.x, n, hit.texturenPoint, hit.material);
 		double r = n1 / n2;
 		double c = Direction.dotProduct(Direction.negate(n), d);
 		
@@ -77,12 +79,12 @@ public class Glass implements Material {
 	}
 
 	@Override
-	public Color getAlbedo() {
-		return albedo;
+	public Color getAlbedo(double x, double y) {
+		return albedo.getColor(x, y);
 	}
 
 	@Override
-	public Color getEmission() {
+	public Color getEmission(double x, double y) {
 		return emission;
 	}
 

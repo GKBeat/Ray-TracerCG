@@ -14,6 +14,7 @@ import cgg.material.BackgroundMaterial;
 import cgg.material.Diffuse;
 import cgg.material.Glass;
 import cgg.material.Metall;
+import cgg.sampler.Constant;
 import cgg.sampler.Raytracer;
 import cgg.sampler.StratifiedSampler;
 import cgg.scene.LochKamera;
@@ -46,12 +47,12 @@ public class A08 {
 		Matrix mSeite = multiply(translation(direction(12, 1, 0)), rotation(yAxis, 33.75));
 		Matrix mObenView = Matrix.multiply(mOben, Matrix.rotation(Direction.xAxis, 33.75));
 
-		Background bg = new Background(new BackgroundMaterial(white));
-		ZylinderY stamm = new ZylinderY(zero, 0.25, 2, new Glass(br));
-		Kugel krone = new Kugel(zero, 2, new Glass(new Color(0.1, 0.4, 0.2)));
+		Background bg = new Background(new BackgroundMaterial(new Constant(white)));
+		ZylinderY stamm = new ZylinderY(zero, 0.25, 2, new Glass(new Constant(br)));
+		Kugel krone = new Kugel(zero, 2, new Glass(new Constant(new Color(0.1, 0.4, 0.2))));
 		
-		ZylinderY stamm1 = new ZylinderY(zero, 0.25, 2, new Glass(br));
-		Kugel krone1 = new Kugel(zero, 2, new Glass(new Color(0.1, 0.4, 0.2)));
+		ZylinderY stamm1 = new ZylinderY(zero, 0.25, 2, new Glass(new Constant(br)));
+		Kugel krone1 = new Kugel(zero, 2, new Glass(new Constant(new Color(0.1, 0.4, 0.2))));
 		
 		Group trunk = new Group(new Shape[] {stamm}, new Transformation(translation(direction(0, -1, 0))));
 		Group crone = new Group(new Shape[] {krone}, new Transformation(translation(direction(0, 3, 0))));
@@ -63,25 +64,25 @@ public class A08 {
 		Group tree1 = new Group(new Shape[] {trunk1, crone1}, new Transformation(translation(direction(-6, 0, -5))));
 			
 		
-		Plane snow = new Plane(25, Point.point(0, -1, -6), Direction.direction(0, 1, 0), new Diffuse(Color.white));
-		Plane darness = new Plane (30, Point.point(0, 11, -10), Direction.direction(0, 0, 1), new Diffuse(new Color(0.1, 0.2, 0.3)));
-		Plane darkness = new Plane (30, Point.point(-25, 11, -10), Direction.direction(1, 0, 0), new Diffuse(new Color(0.1, 0.2, 0.3)));
+		Plane snow = new Plane(25, Point.point(0, -1, -6), Direction.direction(0, 1, 0), new Diffuse(new Constant(Color.white)));
+		Plane darness = new Plane (30, Point.point(0, 11, -10), Direction.direction(0, 0, 1), new Diffuse(new Constant(new Color(0.1, 0.2, 0.3))));
+		Plane darkness = new Plane (30, Point.point(-25, 11, -10), Direction.direction(1, 0, 0), new Diffuse(new Constant(new Color(0.1, 0.2, 0.3))));
 		
 		Group environment = new Group(new Shape[] {darness, snow, tree, tree1, darkness});
 //-------------------------------------------------------------------------------------------------------------------------- 		
 		
-		Shape pfeilerR = new ZylinderY(Point.point(2.7, -1, -4), 0.25, 3, new Diffuse(br));
-		Shape pfeilerL = new ZylinderY(Point.point(-2.7, -1, -4), 0.25, 3, new Diffuse(br));
+		Shape pfeilerR = new ZylinderY(Point.point(2.7, -1, -4), 0.25, 3, new Diffuse(new Constant(br)));
+		Shape pfeilerL = new ZylinderY(Point.point(-2.7, -1, -4), 0.25, 3, new Diffuse(new Constant(br)));
 		
 //-------------------------------------------------------------------------------------------------------------------------- 		
-		Plane see1 = new Plane(0.7, Point.point(-2.5, -1, -2.5), Direction.direction(0, 1, 0), new Metall(Color.blue, 0));
-		Plane see2 = new Plane(1, Point.point(-2, -1, -1.5), Direction.direction(0, 1, 0), new Metall(Color.blue, 0));
+		Plane see1 = new Plane(0.7, Point.point(-2.5, -1, -2.5), Direction.direction(0, 1, 0), new Metall(new Constant(Color.blue), 0));
+		Plane see2 = new Plane(1, Point.point(-2, -1, -1.5), Direction.direction(0, 1, 0), new Metall(new Constant(Color.blue), 0));
 		
 		Group see = new Group(new Shape[] {see1, see2}, new Transformation(translation(direction(-1, 0, 0))));
 //-------------------------------------------------------------------------------------------------------------------------- 		
-		Plane kranzK = new Plane (0.3, Point.point(0, 0.5, -3.75), Direction.direction(0, 0, 1), new Diffuse(new Color(0.1, 0.4, 0.2)));
+		Plane kranzK = new Plane (0.3, Point.point(0, 0.5, -3.75), Direction.direction(0, 0, 1), new Diffuse(new Constant(new Color(0.1, 0.4, 0.2))));
 		Group christSpheres = A07.makeChristSphere(kranzK); 
-		Plane loch = new Plane(0.1, Point.point(0, 0.5, -3.75), Direction.direction(0, 0, 1), new Diffuse(br));
+		Plane loch = new Plane(0.1, Point.point(0, 0.5, -3.75), Direction.direction(0, 0, 1), new Diffuse(new Constant(br)));
 
 		Group kranz = new Group(new Shape[] {kranzK, christSpheres, loch}, new Transformation(translation(direction(0, 0.75, 0))));
 //-------------------------------------------------------------------------------------------------------------------------- 		
@@ -156,9 +157,9 @@ public class A08 {
 		Matrix top = multiply(translation(direction(-2.7, translateY, -4-scale)), rotation(yAxis, rotation));
 		
 		
-		tmp.shapes[0] = new Group(new Shape[] {new ZylinderX(zero, 0.25, scale, new Diffuse(br))}, new Transformation(left));
-		tmp.shapes[1] = new Group(new Shape[] {new ZylinderX(zero, 0.25, scale, new Diffuse(br))}, new Transformation(right));
-		tmp.shapes[2] = new Group(new Shape[] {new ZylinderX(zero, 0.25, scale, new Diffuse(br))}, new Transformation(top));
+		tmp.shapes[0] = new Group(new Shape[] {new ZylinderX(zero, 0.25, scale, new Diffuse(new Constant(br)))}, new Transformation(left));
+		tmp.shapes[1] = new Group(new Shape[] {new ZylinderX(zero, 0.25, scale, new Diffuse(new Constant(br)))}, new Transformation(right));
+		tmp.shapes[2] = new Group(new Shape[] {new ZylinderX(zero, 0.25, scale, new Diffuse(new Constant(br)))}, new Transformation(top));
 		group.shapes[index] = tmp;
 		depth--;
 		index++;

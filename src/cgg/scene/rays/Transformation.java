@@ -25,8 +25,9 @@ public class Transformation {
 	public Hit transformHitToWorld(Hit hit) {
 		Point newX = Matrix.multiply(toWorld, hit.x);
 		Direction newN = Matrix.multiply(toWorldN, hit.n);
+		Point newP = Matrix.multiply(toWorld, hit.texturenPoint);
 		
-		return new Hit(hit.t, newX, newN, hit.material);
+		return new Hit(hit.t, newX, newN, newP, hit.material);
 	}
 
 }

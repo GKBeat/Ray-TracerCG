@@ -1,6 +1,7 @@
 package cgg.scene.shapes;
 
 import cgg.material.Material;
+import cgg.sampler.Texture;
 import cgg.scene.rays.Hit;
 import cgg.scene.rays.Ray;
 import cgtools.Direction;
@@ -20,6 +21,7 @@ public class Plane implements Shape {
 		this.n = Direction.normalize(n);
 		this.material = material;
 	}
+	
 
 	@Override
 	public Hit intersect(Ray r) {
@@ -40,7 +42,10 @@ public class Plane implements Shape {
 				if (d <= distanzeLenght) {
 					return null;
 				}
-				return new Hit(t, hit, n, material);
+				
+				double u = hit.x/d+0.5;
+				double v = hit.z/d+0.5;
+				return new Hit(t, hit, n, Point.point(u, v, 0), material);
 			} else {
 				return null;
 			}

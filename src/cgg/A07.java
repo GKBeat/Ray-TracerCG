@@ -4,6 +4,7 @@ import cgg.material.BackgroundMaterial;
 import cgg.material.Diffuse;
 import cgg.material.Glass;
 import cgg.material.Metall;
+import cgg.sampler.Constant;
 import cgg.sampler.Raytracer;
 import cgg.sampler.StratifiedSampler;
 import cgg.scene.LochKamera;
@@ -37,21 +38,21 @@ public class A07 {
 		
 		Image image = new Image(width, height);
 		LochKamera camera = new LochKamera(width, height, Math.PI/2, mId, 0, Double.POSITIVE_INFINITY);
-		Background bg = new Background(new BackgroundMaterial(Color.white));
+		Background bg = new Background(new BackgroundMaterial(new Constant(Color.white)));
 		
-		Plane snow = new Plane(25, Point.point(0, -1, -6), Direction.direction(0, 1, 0), new Diffuse(Color.white));
-		Plane darness = new Plane (25, Point.point(0, 0, -10), Direction.direction(0, 0, 1), new Diffuse(new Color(0.1, 0.2, 0.3)));
-		Plane kranz = new Plane (0.3, Point.point(0, 0.5, -3.75), Direction.direction(0, 0, 1), new Diffuse(new Color(0.1, 0.4, 0.2)));
-		Plane loch = new Plane(0.1, Point.point(0, 0.5, -3.75), Direction.direction(0, 0, 1), new Diffuse(br));
-		Plane see1 = new Plane(0.7, Point.point(-2.5, -1, -2.5), Direction.direction(0, 1, 0), new Metall(Color.blue, 0));
-		Plane see2 = new Plane(1, Point.point(-2, -1, -1.5), Direction.direction(0, 1, 0), new Metall(Color.blue, 0));
-		Plane moon = new Plane(2, Point.point(-9, 6, -10), Direction.direction(0, 0, 1), new Diffuse(Color.white));
+		Plane snow = new Plane(25, Point.point(0, -1, -6), Direction.direction(0, 1, 0), new Diffuse(new Constant(Color.white)));
+		Plane darness = new Plane (25, Point.point(0, 0, -10), Direction.direction(0, 0, 1), new Diffuse(new Constant(new Color(0.1, 0.2, 0.3))));
+		Plane kranz = new Plane (0.3, Point.point(0, 0.5, -3.75), Direction.direction(0, 0, 1), new Diffuse(new Constant(new Color(0.1, 0.4, 0.2))));
+		Plane loch = new Plane(0.1, Point.point(0, 0.5, -3.75), Direction.direction(0, 0, 1), new Diffuse(new Constant(br)));
+		Plane see1 = new Plane(0.7, Point.point(-2.5, -1, -2.5), Direction.direction(0, 1, 0), new Metall(new Constant(Color.blue), 0));
+		Plane see2 = new Plane(1, Point.point(-2, -1, -1.5), Direction.direction(0, 1, 0), new Metall(new Constant(Color.blue), 0));
+		Plane moon = new Plane(2, Point.point(-9, 6, -10), Direction.direction(0, 0, 1), new Diffuse(new Constant(Color.white)));
 		
-		Shape pfeilerR = new ZylinderY(Point.point(2.7, -1, -4), 0.25, 2, new Diffuse(br));
-		Shape pfeilerL = new ZylinderY(Point.point(-2.7, -1, -4), 0.25, 2, new Diffuse(br));
+		Shape pfeilerR = new ZylinderY(Point.point(2.7, -1, -4), 0.25, 2, new Diffuse(new Constant(br)));
+		Shape pfeilerL = new ZylinderY(Point.point(-2.7, -1, -4), 0.25, 2, new Diffuse(new Constant(br)));
 		
-		Shape a = new ZylinderY(Point.point(0.5, -1, -2), 0.25, 0.5, new Glass(Color.white));
-		Shape b = new ZylinderY(Point.point(-0.5, -1, -2), 0.25, 0.5, new Glass(Color.white));
+		Shape a = new ZylinderY(Point.point(0.5, -1, -2), 0.25, 0.5, new Glass(new Constant(Color.white)));
+		Shape b = new ZylinderY(Point.point(-0.5, -1, -2), 0.25, 0.5, new Glass(new Constant(Color.white)));
 		
 		Group see = new Group(new Shape[] {see1, see2});
 		
@@ -93,7 +94,7 @@ public class A07 {
 		Group tmp = new Group(new Shape[6]);
 		
 		for(int i = 0; i < tmp.shapes.length; i++) {
-			tmp.shapes[i] = new ZylinderX(Point.point(x, y, -4), 0.25, 2, new Diffuse(br));
+			tmp.shapes[i] = new ZylinderX(Point.point(x, y, -4), 0.25, 2, new Diffuse(new Constant(br)));
 			y += 0.5;
 		}
 		return tmp;
@@ -102,7 +103,7 @@ public class A07 {
 	public static Group makeLogTop(double x, double y, double z, double height) {
 		Group tmp = new Group(new Shape[6]);
 		for(int i = 0; i < tmp.shapes.length; i++) {
-			tmp.shapes[i] = new ZylinderX(Point.point(x, y, z), 0.3, height, new Diffuse(br));
+			tmp.shapes[i] = new ZylinderX(Point.point(x, y, z), 0.3, height, new Diffuse(new Constant(br)));
 			height--;
 			if(height==0) {
 				height = 1;
@@ -116,7 +117,7 @@ public class A07 {
 	public static Group makeLogTop1(double x, double y, double z, double height) {
 		Group tmp = new Group(new Shape[6]);
 		for(int i = 0; i < tmp.shapes.length; i++) {
-			tmp.shapes[i] = new ZylinderX(Point.point(x, y, z), 0.3, height, new Diffuse(br));
+			tmp.shapes[i] = new ZylinderX(Point.point(x, y, z), 0.3, height, new Diffuse(new Constant(br)));
 			height--;
 			if(height==0) {
 				height = 1;
@@ -132,7 +133,7 @@ public class A07 {
 		Group tmp = new Group(new Shape[5]);
 		
 		for(int i = 0; i < tmp.shapes.length; i++) {
-			tmp.shapes[i] = new ZylinderY(Point.point(x, y, -3.95), 0.1, 3, new Diffuse(br));
+			tmp.shapes[i] = new ZylinderY(Point.point(x, y, -3.95), 0.1, 3, new Diffuse(new Constant(br)));
 			x += 0.2;
 		}
 		return tmp;
@@ -141,15 +142,15 @@ public class A07 {
 	public static Group makeChristSphere(Plane plane) {
 		Group tmp = new Group(new Shape[8]);
 		
-		tmp.shapes[0] = new Kugel(Point.point(plane.p.x+0.2, plane.p.y, plane.p.z), 0.1, new Metall(Color.red, 0));
-		tmp.shapes[1] = new Kugel(Point.point(plane.p.x, plane.p.y+0.2, plane.p.z), 0.1, new Metall(Color.red, 1));
-		tmp.shapes[2] = new Kugel(Point.point(plane.p.x-0.2, plane.p.y, plane.p.z), 0.1, new Metall(Color.red, 0));
-		tmp.shapes[3] = new Kugel(Point.point(plane.p.x, plane.p.y-0.2, plane.p.z), 0.1, new Metall(Color.red, 1));
+		tmp.shapes[0] = new Kugel(Point.point(plane.p.x+0.2, plane.p.y, plane.p.z), 0.1, new Metall(new Constant(Color.red), 0));
+		tmp.shapes[1] = new Kugel(Point.point(plane.p.x, plane.p.y+0.2, plane.p.z), 0.1, new Metall(new Constant(Color.red), 1));
+		tmp.shapes[2] = new Kugel(Point.point(plane.p.x-0.2, plane.p.y, plane.p.z), 0.1, new Metall(new Constant(Color.red), 0));
+		tmp.shapes[3] = new Kugel(Point.point(plane.p.x, plane.p.y-0.2, plane.p.z), 0.1, new Metall(new Constant(Color.red), 1));
 		
-		tmp.shapes[4] = new Kugel(Point.point(plane.p.x+0.2, plane.p.y+0.2, plane.p.z), 0.05, new Metall(ag, 0));
-		tmp.shapes[5] = new Kugel(Point.point(plane.p.x-0.2, plane.p.y+0.2, plane.p.z), 0.05, new Metall(ag, 1));
-		tmp.shapes[6] = new Kugel(Point.point(plane.p.x+0.2, plane.p.y-0.2, plane.p.z), 0.05, new Metall(ag, 1));
-		tmp.shapes[7] = new Kugel(Point.point(plane.p.x-0.2, plane.p.y-0.2, plane.p.z), 0.05, new Metall(ag, 0));
+		tmp.shapes[4] = new Kugel(Point.point(plane.p.x+0.2, plane.p.y+0.2, plane.p.z), 0.05, new Metall(new Constant(ag), 0));
+		tmp.shapes[5] = new Kugel(Point.point(plane.p.x-0.2, plane.p.y+0.2, plane.p.z), 0.05, new Metall(new Constant(ag), 1));
+		tmp.shapes[6] = new Kugel(Point.point(plane.p.x+0.2, plane.p.y-0.2, plane.p.z), 0.05, new Metall(new Constant(ag), 1));
+		tmp.shapes[7] = new Kugel(Point.point(plane.p.x-0.2, plane.p.y-0.2, plane.p.z), 0.05, new Metall(new Constant(ag), 0));
 		
 		return tmp;
 	}
@@ -157,9 +158,9 @@ public class A07 {
 	public static Group makeKerzenStand(double x) {
 		Group tmp = new Group(new Shape[3]);
 		
-		tmp.shapes[0] = new Plane(0.2, Point.point(x, -0.50, -3.5), Direction.direction(0, 1, 0), new Diffuse(ag));
-		tmp.shapes[1] = new ZylinderY(Point.point(x, -0.5, -3.5), 0.05, 0.25, new Diffuse(Color.white));
-		tmp.shapes[2] = new Kugel(Point.point(x, -0.20, -3.5), 0.05, new BackgroundMaterial(Color.red));
+		tmp.shapes[0] = new Plane(0.2, Point.point(x, -0.50, -3.5), Direction.direction(0, 1, 0), new Diffuse(new Constant(ag)));
+		tmp.shapes[1] = new ZylinderY(Point.point(x, -0.5, -3.5), 0.05, 0.25, new Diffuse(new Constant(Color.white)));
+		tmp.shapes[2] = new Kugel(Point.point(x, -0.20, -3.5), 0.05, new BackgroundMaterial(new Constant(Color.red)));
 		
 		return tmp;
 	}
@@ -169,7 +170,7 @@ public class A07 {
 		double z = plane.p.z;
 		for(int i = 0; i < tmp.shapes.length; i++) {
 			
-			tmp.shapes[i] = new Plane(0.7, Point.point(plane.p.x, plane.p.y, z), Direction.direction(0, 1, 0), new Metall(brI, 1));
+			tmp.shapes[i] = new Plane(0.7, Point.point(plane.p.x, plane.p.y, z), Direction.direction(0, 1, 0), new Metall(new Constant(brI), 1));
 			z += 0.5;
 		}
 		return tmp;
@@ -179,9 +180,9 @@ public class A07 {
 		Group tmp = new Group(new Shape[index]);
 		for(int i = 0; i < tmp.shapes.length; i++) {
 			if(i%2 == 0) {
-				tmp.shapes[i] = new Kugel(Point.point(x, -0.75, z), 0.25, new Diffuse(new Color(0.1, 0.4, 0.2)));
+				tmp.shapes[i] = new Kugel(Point.point(x, -0.75, z), 0.25, new Diffuse(new Constant(new Color(0.1, 0.4, 0.2))));
 			}else {
-				tmp.shapes[i] = new Kugel(Point.point(x, -0.75, z), 0.15, new Diffuse(new Color(0.1, 0.4, 0.2)));
+				tmp.shapes[i] = new Kugel(Point.point(x, -0.75, z), 0.15, new Diffuse(new Constant(new Color(0.1, 0.4, 0.2))));
 			}
 			z += 0.25;
 		}

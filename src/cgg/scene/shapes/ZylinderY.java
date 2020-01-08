@@ -98,20 +98,39 @@ public class ZylinderY implements Shape {
 		if(topOrBottom) {
 			if((t2 <= r.tMin || t1 <= t2) && t1 >= r.tMin && t1 <= r.tMax) {
 				dir = Point.subtract(p1,center);
-				return new Hit(t1, p1, Vector.normalize(dir), material);
+				Direction normal = Vector.normalize(dir);
+				
+			    
+				return new Hit(t1, p1, normal, texturePoint(p1, normal), material);
 			}else if((t1 <= r.tMin || t2 <= t1) && t2 >= r.tMin && t2 <= r.tMax) {
 				dir = Point.subtract(p2, center);
-				return new Hit(t2, p2, Vector.normalize(dir), material);
+				Direction normal = Vector.normalize(dir);
+		
+				
+				return new Hit(t2, p2, normal, texturePoint(p2, normal), material);
 			}
 		}else {
 			if((t2 <= r.tMin || t1 <= t2) && t1 >= r.tMin && t1 <= r.tMax) {
 				dir = Point.subtract(p1, Point.point(center.x, p1.y, center.z));
-				return new Hit(t1, p1, Vector.normalize(dir), material);
+				Direction normal = Vector.normalize(dir);
+			
+				
+				return new Hit(t1, p1, normal, texturePoint(p1, normal), material);
 			}else if((t1 <= r.tMin || t2 <= t1) && t2 >= r.tMin && t2 <= r.tMax) {
 				dir = Point.subtract(p2, Point.point(center.x, p2.y, center.z));
-				return new Hit(t2, p2, Vector.normalize(dir), material);
+				Direction normal = Vector.normalize(dir);
+				
+			    
+				return new Hit(t2, p2, normal, texturePoint(p2, normal), material);
 			}
 		}
 		return null;
+	}
+	
+	private Point texturePoint(Point p, Direction normal) {
+		double azimuth = Math.PI + Math.atan2(normal.x, normal.z);
+	    double u = azimuth / (2 * Math.PI);
+	    double v = (yMin-p.y) / Math.PI;
+		return Point.point(u, v, 0);
 	}
 }

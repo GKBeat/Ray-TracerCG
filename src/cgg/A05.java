@@ -2,6 +2,7 @@ package cgg;
 
 import cgg.material.BackgroundMaterial;
 import cgg.material.Diffuse;
+import cgg.sampler.Constant;
 import cgg.sampler.Raytracer;
 import cgg.sampler.StratifiedSampler;
 import cgg.scene.LochKamera;
@@ -24,17 +25,17 @@ public class A05 {
 		Image image = new Image(width, height);
 		LochKamera camera = new LochKamera(width, height, Math.PI / 3, Matrix.identity, 0, Double.POSITIVE_INFINITY);
 		
-		Shape ground = new Plane(7, Point.point(0.0, -0.5, 0.0), Direction.direction(0, 1, 0), new Diffuse(new Color(0.1, 0.8, 0.2)));
+		Shape ground = new Plane(7, Point.point(0.0, -0.5, 0.0), Direction.direction(0, 1, 0), new Diffuse(new Constant(new Color(0.1, 0.8, 0.2))));
 		
-		Shape globe1 = new Kugel(Point.point(-1.25, -0.2, -1.75), 0.3, new Diffuse(new Color(0.3, 0.8, 1)));
-		Shape globe2 = new Kugel(Point.point(-1, 0, -2.5), 0.5, new Diffuse(new Color(0.3, 0.4, 1)));
+		Shape globe1 = new Kugel(Point.point(-1.25, -0.2, -1.75), 0.3, new Diffuse(new Constant(new Color(0.3, 0.8, 1))));
+		Shape globe2 = new Kugel(Point.point(-1, 0, -2.5), 0.5, new Diffuse(new Constant(new Color(0.3, 0.4, 1))));
 		
-		Shape globe5 = new Kugel(Point.point(0, 1.5, -5), 2, new Diffuse(new Color(0.3, 0.2, 1)));
+		Shape globe5 = new Kugel(Point.point(0, 1.5, -5), 2, new Diffuse(new Constant(new Color(0.3, 0.2, 1))));
 		
-		Shape globe3 = new Kugel(Point.point(1.0, 0, -2.5), 0.5, new Diffuse(new Color(0.4, 0.2, 1)));
-		Shape globe4 = new Kugel(Point.point(1.25, -0.2, -1.75), 0.3, new Diffuse(new Color(0.8, 0.2, 1)));
+		Shape globe3 = new Kugel(Point.point(1.0, 0, -2.5), 0.5, new Diffuse(new Constant(new Color(0.4, 0.2, 1))));
+		Shape globe4 = new Kugel(Point.point(1.25, -0.2, -1.75), 0.3, new Diffuse(new Constant(new Color(0.8, 0.2, 1))));
 		
-		Background bg = new Background(new BackgroundMaterial(new Color(0.6, 0.9, 1)));
+		Background bg = new Background(new BackgroundMaterial(new Constant(new Color(0.6, 0.9, 1))));
 		
 		Group gr = new Group(new Shape[] {ground, globe1, globe2, globe3, globe4, globe5, bg});
 		Raytracer raytracer = new Raytracer(camera, gr, 5);

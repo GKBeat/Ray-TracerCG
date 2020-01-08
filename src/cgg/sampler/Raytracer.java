@@ -22,7 +22,6 @@ public class Raytracer implements Sampler{
 	}
 	
 	public Color getColor(double x, double y) {
-		
 		return calculateRadiance(cam.getRayThroughPoint(x, y), depth);
 	}
 	
@@ -31,16 +30,17 @@ public class Raytracer implements Sampler{
 			return Color.black;
 		}
 		Hit hit = shape.intersect(ray);
-		
+		double x = hit.texturenPoint.x;
+		double y = hit.texturenPoint.y;
 		Material m = hit.material;
 		Ray r = m.calculateNewRay(hit, ray);
 		
 		if(r != null) {
-			Color c = Color.multiply(m.getAlbedo(), calculateRadiance(r, depth-1));
-			return Color.add(m.getEmission(), c);
+			Color c = Color.multiply(m.getAlbedo(x, y), calculateRadiance(r, depth-1));
+			return Color.add(m.getEmission(x, y), c);
 //			return Vector.asColor(hit.n);
 		}else {
-			return m.getEmission();
+			return m.getEmission(x, y);
 		}
 	}
 

@@ -19,8 +19,6 @@ public class Kugel implements Shape {
 	}
 
 	public Hit intersect(Ray r) {
-		Point p;
-
 		Direction x0 = Point.subtract(r.x0, center);
 
 		double a = Direction.squaredLength(r.d);
@@ -32,26 +30,37 @@ public class Kugel implements Shape {
 		double t, t1, t2;
 
 		if (d < 0) { // kein schnittpunkt
+			
 			return null;
 		} else if (d == 0) { // 1 schnittpunkt
 			t = (-b) / (2 * a);
-
-			p = r.pointAt(t);
-			return new Hit(t, p, Vector.normalize(Point.subtract(p, this.center)), material);
+			
+			return calcHit(t, r);
 		} else { // 2 schnittpunkte
 
 			t1 = (-b + Math.sqrt(d)) / (2 * a);
 			t2 = (-b - Math.sqrt(d)) / (2 * a);
 
 			if ((t2 < r.tMin || t1 < t2) && t1 >= r.tMin && t1 <= r.tMax) { 
-				p = r.pointAt(t1);
-				return new Hit(t1, p, Vector.normalize(Point.subtract(p, this.center)), material);
-
+				
+				return calcHit(t1, r);
 			} else if ((t1 < r.tMin || t2 < t1) && t2 >= r.tMin && t2 <= r.tMax) {
-				p = r.pointAt(t2);
-				return new Hit(t2, p, Vector.normalize(Point.subtract(p, this.center)), material);
+				
+				return calcHit(t2, r);
 			}
 		}
 		return null;
+	}
+	
+	private Hit calcHit(double t, Ray r) {
+		Point p = r.pointAt(t);
+		Direction normal = Vector.normalize(Point.subtract(p, this.center));
+		
+		double inclination = Math.acos(normal.y);
+	    double azimuth = Math.PI + Math.atan2(normal.x, normal.z);
+	    double u = azimuth / (2 * Math.PI);
+	    double v = inclination / Math.PI;
+	    
+	    return new Hit(t, p, normal, Point.point(u, v, 0), material);
 	}
 }

@@ -10,12 +10,21 @@ public class Hit {
 	public final Point x; //position des treffers
 	public final Direction n;
 	public final Material material;
-	
+	public final Point texturenPoint;
 	
 	public Hit(double t, Point x, Direction n, Material material) {
 		this.t = t;
 		this.x = x;
 		this.n = n;
+		texturenPoint = Point.point(0, 0, 0);
+		this.material = material;
+	}
+	
+	public Hit(double t, Point x, Direction n, Point texturenPoint, Material material) {
+		this.t = t;
+		this.x = x;
+		this.n = n;
+		this.texturenPoint = texturenPoint;
 		this.material = material;
 	}
 	

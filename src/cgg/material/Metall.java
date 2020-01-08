@@ -5,15 +5,17 @@ import cgg.scene.rays.Ray;
 import cgtools.Color;
 import cgtools.Direction;
 import cgtools.Random;
+import cgtools.Sampler;
 import cgtools.Util;
 
 public class Metall implements Material{
 	
-	protected Color albedo;
+	protected Sampler albedo;
 	protected Color emission;
 	protected double rauigkeit;
 	
-	public Metall(Color albedo, double rauigkeit) {
+	
+	public Metall(Sampler albedo, double rauigkeit) {
 		this.albedo = albedo;
 		emission = new Color(0, 0, 0);
 		this.rauigkeit = rauigkeit;
@@ -65,13 +67,14 @@ public class Metall implements Material{
 		return false;
 	}
 
+
 	@Override
-	public Color getAlbedo() {
-		return albedo;
+	public Color getAlbedo(double x, double y) {
+		return albedo.getColor(x, y);
 	}
 
 	@Override
-	public Color getEmission() {
+	public Color getEmission(double x, double y) {
 		return emission;
 	}
 

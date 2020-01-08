@@ -5,15 +5,16 @@ import cgg.scene.rays.Ray;
 import cgtools.Color;
 import cgtools.Direction;
 import cgtools.Random;
+import cgtools.Sampler;
 import cgtools.Util;
 
 public class Diffuse implements Material{
 	
-	protected Color albedo;
 	protected Color emission;
+	protected Sampler albedo;
 	
-	public Diffuse(Color albedo) {
-		this.albedo = albedo;
+	public Diffuse(Sampler sampler) {
+		this.albedo = sampler;
 		emission = new Color(0, 0, 0);
 	}
 
@@ -50,15 +51,12 @@ public class Diffuse implements Material{
 	}
 
 	@Override
-	public Color getAlbedo() {
-		return albedo;
+	public Color getAlbedo(double x, double y) {
+		return albedo.getColor(x, y);
 	}
 
 	@Override
-	public Color getEmission() {
+	public Color getEmission(double x, double y) {
 		return emission;
 	}
-
-
-
 }
