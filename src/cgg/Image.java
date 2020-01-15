@@ -48,7 +48,11 @@ public class Image {
         for(int x = 0; x < width; x++) {
         	for(int y = 0; y < height; y++) {
         		try {
-					setPixel(x, y, pixels.get(index).get());
+        			Color c = pixels.get(index).get();
+        			if(c == null) {
+        				continue;
+        			}
+					setPixel(x, y, c);
 				} catch (InterruptedException | ExecutionException e) {
 					System.err.println("tbh idk");
 					e.printStackTrace();
@@ -60,6 +64,14 @@ public class Image {
         long endTime = System.currentTimeMillis();
         System.out.println("Took " + (endTime - startTime)/ 1_000 + " s");
     }
+    
+//	public void sample(Sampler sampler) {
+//		for (int x = 0; x != width; x++) {
+//			for (int y = 0; y != height; y++) {
+//				setPixel(x, y, sampler.getColor(x, y));
+//			}
+//		}
+//	}
 
     public void write(String filename) {
     	ImageWriter.write(filename, pixels, width, height);

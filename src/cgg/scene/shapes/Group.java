@@ -25,11 +25,11 @@ public class Group implements Shape{
 	public Hit intersect(Ray r) {
 		double t = Double.POSITIVE_INFINITY;
 		Point x = Point.point(Double.POSITIVE_INFINITY, Double.POSITIVE_INFINITY, Double.POSITIVE_INFINITY);
-		Direction n =  Direction.direction(Double.POSITIVE_INFINITY, Double.POSITIVE_INFINITY, Double.POSITIVE_INFINITY);
+		Direction n = Direction.direction(Double.POSITIVE_INFINITY, Double.POSITIVE_INFINITY, Double.POSITIVE_INFINITY);
 		
 		r = transform.transformRayFromWorld(r);
 		
-		Hit shortestHit = new Hit(t, x, n, null ,null);
+		Hit shortestHit = new Hit(t, x, n, x ,null);
 		for(Shape s : shapes) {
 			Hit tmp = s.intersect(r);
 			if(tmp == null) {

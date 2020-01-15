@@ -18,6 +18,7 @@ public class Background implements Shape{
 	public Hit intersect(Ray r) {
 		
 		double t = Double.MAX_VALUE;
+		
 		Point p = r.pointAt(t);
 		
 		Direction normal = r.d;
