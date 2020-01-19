@@ -7,7 +7,7 @@ import cgtools.Direction;
 import cgtools.Point;
 import cgtools.Vector;
 
-public class ZylinderY implements Shape {
+public class ZylinderDeprecated implements Shape {
 
 	public final Point center;
 	public final double radius;
@@ -17,7 +17,7 @@ public class ZylinderY implements Shape {
 	private double yMin;
 	private double yMax;
 
-	public ZylinderY(Point center, double radius, double height, Material material) {
+	public ZylinderDeprecated(Point center, double radius, double height, Material material) {
 		this.center = center;
 		this.radius = radius;
 		this.height = height;

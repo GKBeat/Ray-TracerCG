@@ -104,6 +104,10 @@ public abstract class Vector {
     public static Direction directionTo(Point p) {
         return direction(p.x, p.y, p.z);
     }
+    
+    public static Point interpolate(Point p1, Point p2, double t) {
+    	return  add(p1, add(multiply((1-t), directionTo(p1)), multiply(t, directionTo(p2))));
+    }
 
     @Override
     public int hashCode() {

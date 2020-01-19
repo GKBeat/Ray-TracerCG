@@ -13,8 +13,8 @@ import cgg.scene.shapes.Group;
 import cgg.scene.shapes.Kugel;
 import cgg.scene.shapes.Plane;
 import cgg.scene.shapes.Shape;
-import cgg.scene.shapes.ZylinderX;
-import cgg.scene.shapes.ZylinderY;
+import cgg.scene.shapes.Zylinder;
+import cgg.scene.shapes.ZylinderDeprecated;
 import cgtools.Color;
 import cgtools.Direction;
 import cgtools.Matrix;
@@ -48,11 +48,11 @@ public class A07 {
 		Plane see2 = new Plane(1, Point.point(-2, -1, -1.5), Direction.direction(0, 1, 0), new Metall(new Constant(Color.blue), 0));
 		Plane moon = new Plane(2, Point.point(-9, 6, -10), Direction.direction(0, 0, 1), new Diffuse(new Constant(Color.white)));
 		
-		Shape pfeilerR = new ZylinderY(Point.point(2.7, -1, -4), 0.25, 2, new Diffuse(new Constant(br)));
-		Shape pfeilerL = new ZylinderY(Point.point(-2.7, -1, -4), 0.25, 2, new Diffuse(new Constant(br)));
+		Shape pfeilerR = new ZylinderDeprecated(Point.point(2.7, -1, -4), 0.25, 2, new Diffuse(new Constant(br)));
+		Shape pfeilerL = new ZylinderDeprecated(Point.point(-2.7, -1, -4), 0.25, 2, new Diffuse(new Constant(br)));
 		
-		Shape a = new ZylinderY(Point.point(0.5, -1, -2), 0.25, 0.5, new Glass(new Constant(Color.white)));
-		Shape b = new ZylinderY(Point.point(-0.5, -1, -2), 0.25, 0.5, new Glass(new Constant(Color.white)));
+		Shape a = new ZylinderDeprecated(Point.point(0.5, -1, -2), 0.25, 0.5, new Glass(new Constant(Color.white)));
+		Shape b = new ZylinderDeprecated(Point.point(-0.5, -1, -2), 0.25, 0.5, new Glass(new Constant(Color.white)));
 		
 		Group see = new Group(new Shape[] {see1, see2});
 		
@@ -94,7 +94,7 @@ public class A07 {
 		Group tmp = new Group(new Shape[6]);
 		
 		for(int i = 0; i < tmp.shapes.length; i++) {
-			tmp.shapes[i] = new ZylinderX(Point.point(x, y, -4), 0.25, 2, new Diffuse(new Constant(br)));
+			tmp.shapes[i] = new Zylinder(Point.point(x, y, -4), 0.25, 2, new Diffuse(new Constant(br)));
 			y += 0.5;
 		}
 		return tmp;
@@ -103,7 +103,7 @@ public class A07 {
 	public static Group makeLogTop(double x, double y, double z, double height) {
 		Group tmp = new Group(new Shape[6]);
 		for(int i = 0; i < tmp.shapes.length; i++) {
-			tmp.shapes[i] = new ZylinderX(Point.point(x, y, z), 0.3, height, new Diffuse(new Constant(br)));
+			tmp.shapes[i] = new Zylinder(Point.point(x, y, z), 0.3, height, new Diffuse(new Constant(br)));
 			height--;
 			if(height==0) {
 				height = 1;
@@ -117,7 +117,7 @@ public class A07 {
 	public static Group makeLogTop1(double x, double y, double z, double height) {
 		Group tmp = new Group(new Shape[6]);
 		for(int i = 0; i < tmp.shapes.length; i++) {
-			tmp.shapes[i] = new ZylinderX(Point.point(x, y, z), 0.3, height, new Diffuse(new Constant(br)));
+			tmp.shapes[i] = new Zylinder(Point.point(x, y, z), 0.3, height, new Diffuse(new Constant(br)));
 			height--;
 			if(height==0) {
 				height = 1;
@@ -133,7 +133,7 @@ public class A07 {
 		Group tmp = new Group(new Shape[5]);
 		
 		for(int i = 0; i < tmp.shapes.length; i++) {
-			tmp.shapes[i] = new ZylinderY(Point.point(x, y, -3.95), 0.1, 3, new Diffuse(new Constant(br)));
+			tmp.shapes[i] = new ZylinderDeprecated(Point.point(x, y, -3.95), 0.1, 3, new Diffuse(new Constant(br)));
 			x += 0.2;
 		}
 		return tmp;
@@ -159,7 +159,7 @@ public class A07 {
 		Group tmp = new Group(new Shape[3]);
 		
 		tmp.shapes[0] = new Plane(0.2, Point.point(x, -0.50, -3.5), Direction.direction(0, 1, 0), new Diffuse(new Constant(ag)));
-		tmp.shapes[1] = new ZylinderY(Point.point(x, -0.5, -3.5), 0.05, 0.25, new Diffuse(new Constant(Color.white)));
+		tmp.shapes[1] = new ZylinderDeprecated(Point.point(x, -0.5, -3.5), 0.05, 0.25, new Diffuse(new Constant(Color.white)));
 		tmp.shapes[2] = new Kugel(Point.point(x, -0.20, -3.5), 0.05, new BackgroundMaterial(new Constant(Color.red)));
 		
 		return tmp;

@@ -23,7 +23,7 @@ import cgg.scene.shapes.Group;
 import cgg.scene.shapes.Kugel;
 import cgg.scene.shapes.Plane;
 import cgg.scene.shapes.Shape;
-import cgg.scene.shapes.ZylinderY;
+import cgg.scene.shapes.ZylinderDeprecated;
 import cgtools.Color;
 import cgtools.Direction;
 import cgtools.Matrix;
@@ -62,7 +62,7 @@ public class A10 {
 		
 		Shape globeWall = new Kugel(Point.point(0.25, -1, -3), 0.5, new Diffuse(wand));
 		Shape globePDM = new Kugel(Point.point(0.25, 0, -3), 0.5, new Metall(new TransformedTexture(pd, Matrix.scaling(15, 15, 15)), 0));
-		Shape woodstem = new ZylinderY(Point.point(-0.75, -1.5, -3), 0.5, 2,new Diffuse(wood));
+		Shape woodstem = new ZylinderDeprecated(Point.point(-0.75, -1.5, -3), 0.5, 2,new Diffuse(wood));
 		
 		Shape groundD = new Plane(500, Point.point(0.0, -1.5, 0.0), Direction.direction(0, 1, 0), new Diffuse(new TransformedTexture(dirt, kleinScaliert)));
 
@@ -83,7 +83,7 @@ public class A10 {
 		Background bg1 = new Background(new BackgroundMaterial(orangeSky)); 
 		Shape globeMetall = new Kugel(Point.point(0.25, -1, -3), 0.5, new Metall(wand, 0));
 		Shape globePDD = new Kugel(Point.point(0.25, 0, -3), 0.5, new Diffuse(new TransformedTexture(pd1, Matrix.scaling(15, 15, 15))));
-		Shape woodstemGL = new ZylinderY(Point.point(-0.75, -1.5, -3), 0.5, 2, new Glass(wood));
+		Shape woodstemGL = new ZylinderDeprecated(Point.point(-0.75, -1.5, -3), 0.5, 2, new Glass(wood));
 		Shape groundS = new Plane(500, Point.point(0.0, -1.5, 0.0), Direction.direction(0, 1, 0), new Diffuse(new TransformedTexture(snow, kleinScaliert)));
 		
 		Group main1 = new Group(new Shape[] {bg1, globeMetall, globePDD, woodstemGL, groundS});

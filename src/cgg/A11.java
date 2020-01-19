@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import cgg.material.BackgroundMaterial;
 import cgg.material.Diffuse;
+import cgg.material.Glass;
 import cgg.material.Metall;
 import cgg.sampler.Constant;
 import cgg.sampler.Raytracer;
@@ -20,7 +21,7 @@ import cgg.scene.shapes.Group;
 import cgg.scene.shapes.Kugel;
 import cgg.scene.shapes.Plane;
 import cgg.scene.shapes.Shape;
-import cgg.scene.shapes.ZylinderY;
+import cgg.scene.shapes.ZylinderDeprecated;
 import cgtools.Color;
 import cgtools.Direction;
 import cgtools.Matrix;
@@ -44,14 +45,14 @@ public class A11 {
 		Matrix id = Matrix.identity;
 		
 		Background bg1 = new Background(new BackgroundMaterial(orangeSky)); 
-		Shape globeMetall = new Kugel(Point.point(0, -0.75, -3), 0.75, new Diffuse(snow));
-		Shape globePDD = new Kugel(Point.point(0, 0.25, -3), 0.5, new Diffuse(snow));
+		Shape globeMetall = new Kugel(Point.point(0, -0.75, -3), 0.75, new Glass(snow));
+		Shape globePDD = new Kugel(Point.point(0, 0.25, -3), 0.5, new Glass(snow));
 		Shape groundS = new Plane(500, Point.point(0.0, -1.5, 0.0), Direction.direction(0, 1, 0), new Diffuse(new TransformedTexture(snow, kleinScaliert)));
 		
 		
 		Shape rightGl = new Plane(0.1, Point.point(0.2, 0.3, -2.5), Direction.direction(0, 0, 1), new Metall(new Constant(Color.black), 0));
 		Shape leftGl = new Plane(0.1, Point.point(-0.2, 0.3, -2.5), Direction.direction(0, 0, 1), new Metall(new Constant(Color.black), 0));
-		Shape zyl = new ZylinderY(Point.point(0, 0, 0), 0.025, 0.4, new Diffuse(new Constant(Color.black)));
+		Shape zyl = new ZylinderDeprecated(Point.point(0, 0, 0), 0.025, 0.4, new Diffuse(new Constant(Color.black)));
 		Group a = new Group(new Shape[] {zyl}, new Transformation(Matrix.multiply(Matrix.translation(0.2, 0.33, -2.5), Matrix.rotation(Direction.zAxis, 90))));
 		
 		Group sunglasses = new Group(new Shape[] {rightGl, leftGl, a});
@@ -71,7 +72,7 @@ public class A11 {
 		Raytracer raytracer = new Raytracer(camera, main, 4, lights);
 		
 		
-		image.sample(new StratifiedSampler(raytracer, 200));
+		image.sample(new StratifiedSampler(raytracer, 10));
 		image.write(filename);
 		System.out.println("Wrote image: " + filename);
 		
@@ -81,7 +82,7 @@ public class A11 {
 		Raytracer rt = new Raytracer(camera, main, 4, lights2);
 		
 		
-		image.sample(new StratifiedSampler(rt, 200));
+		image.sample(new StratifiedSampler(rt, 10));
 		image.write(filename1);
 		System.out.println("Wrote image: " + filename1);
 		
