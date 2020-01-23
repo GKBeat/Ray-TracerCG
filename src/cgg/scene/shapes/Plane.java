@@ -14,12 +14,22 @@ public class Plane implements Shape {
 	public final Point p; // ankerpunkt
 	protected Direction n;
 	protected Material material;
+	protected boolean richtungZ;
 
 	public Plane(double d, Point p, Direction n, Material material) {
 		this.d = d;
 		this.p = p;
 		this.n = Direction.normalize(n);
 		this.material = material;
+		richtungZ = false;
+	}
+	
+	public Plane(double d, Point p, Direction n, Material material, boolean richtungZ) {
+		this.d = d;
+		this.p = p;
+		this.n = Direction.normalize(n);
+		this.material = material;
+		this.richtungZ = richtungZ;
 	}
 	
 
@@ -43,8 +53,15 @@ public class Plane implements Shape {
 					return null;
 				}
 				
-				double u = hit.x/d+0.5;
-				double v = hit.z/d+0.5;
+				double u = 0;
+				double v = 0;
+				if(richtungZ) {
+					u = hit.x/d+0.5;
+					v = hit.y/d+0.5;
+				}else {
+					u = hit.x/d+0.5;
+					v = hit.z/d+0.5;
+				}
 				return new Hit(t, hit, n, Point.point(u, v, 0), material);
 			} else {
 				return null;

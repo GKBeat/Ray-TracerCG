@@ -35,7 +35,7 @@ public class Image {
     
     public void sample(Sampler sampler) {
     	long startTime = System.currentTimeMillis();
-    	ExecutorService pool = Executors.newFixedThreadPool(3);
+    	ExecutorService pool = Executors.newFixedThreadPool(2);
     	ArrayList<Future<Color>> pixels = new ArrayList<Future<Color>>(width*height);
     	
         for (int x = 0; x < width; x++) {
